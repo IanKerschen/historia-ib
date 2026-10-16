@@ -20,12 +20,32 @@
     }
     var i = 0, aciertos = 0, respondida = false;
 
+    // Mezcla las opciones (copias, sin mutar los datos) para que la correcta
+    // no quede siempre en la misma posición.
+    function mezclar(arr) {
+      var a = arr.slice();
+      for (var j = a.length - 1; j > 0; j--) {
+        var r = Math.floor(Math.random() * (j + 1));
+        var t = a[j]; a[j] = a[r]; a[r] = t;
+      }
+      return a;
+    }
+    function preparar() {
+      return preguntas.map(function (q) {
+        var copia = {};
+        for (var key in q) copia[key] = q[key];
+        copia.opciones = mezclar(q.opciones || []);
+        return copia;
+      });
+    }
+    var cola = preparar();
+
     function pintar() {
       respondida = false;
-      var q = preguntas[i];
+      var q = cola[i];
       var h = '';
       if (opts.titulo && i === 0) h += '';
-      h += '<div class="quiz-prog">Pregunta ' + (i + 1) + ' de ' + preguntas.length +
+      h += '<div class="quiz-prog">Pregunta ' + (i + 1) + ' de ' + cola.length +
            (q.etiqueta ? ' · <span class="hist-tema-et">' + C.esc(q.etiqueta) + '</span>' : '') + '</div>';
       h += '<div class="quiz-pregunta">' + C.esc(q.pregunta) + '</div>';
       h += '<div class="quiz-opciones">';
@@ -37,7 +57,7 @@
       });
       h += '</div>';
       h += '<div class="btn-row"><button class="btn oculto" id="q-siguiente">' +
-           (i + 1 < preguntas.length ? 'Siguiente →' : 'Ver resultado') + '</button></div>';
+           (i + 1 < cola.length ? 'Siguiente →' : 'Ver resultado') + '</button></div>';
       cont.innerHTML = h;
 
       cont.querySelectorAll(".quiz-op").forEach(function (btn) {
@@ -45,7 +65,7 @@
       });
       var sig = cont.querySelector("#q-siguiente");
       sig.addEventListener("click", function () {
-        if (i + 1 < preguntas.length) { i++; pintar(); C.irArriba(); }
+        if (i + 1 < cola.length) { i++; pintar(); C.irArriba(); }
         else resultado();
       });
     }
@@ -53,7 +73,7 @@
     function responder(k) {
       if (respondida) return;
       respondida = true;
-      var q = preguntas[i];
+      var q = cola[i];
       var elegida = q.opciones[k];
       if (elegida.correcta) aciertos++;
 
@@ -75,18 +95,18 @@
     }
 
     function resultado() {
-      var pct = Math.round((aciertos / preguntas.length) * 100);
+      var pct = Math.round((aciertos / cola.length) * 100);
       var msg = pct >= 80 ? "¡Banda alta! 🔥" : pct >= 60 ? "Bien, pero afiná." : "A repasar y volver.";
       cont.innerHTML =
         '<div class="quiz-resultado">' +
-        '<div class="quiz-score">' + aciertos + '/' + preguntas.length + '</div>' +
+        '<div class="quiz-score">' + aciertos + '/' + cola.length + '</div>' +
         '<p><b>' + pct + '%</b> · ' + msg + '</p>' +
         '<div class="btn-row" style="justify-content:center">' +
         '<button class="btn" id="q-reintentar">Reintentar</button></div></div>';
       cont.querySelector("#q-reintentar").addEventListener("click", function () {
-        i = 0; aciertos = 0; pintar();
+        cola = preparar(); i = 0; aciertos = 0; pintar();
       });
-      if (opts.onFin) opts.onFin(aciertos, preguntas.length);
+      if (opts.onFin) opts.onFin(aciertos, cola.length);
     }
 
     pintar();
