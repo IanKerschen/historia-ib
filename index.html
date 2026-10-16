@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Historia HL · Estudio IB</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/cajas.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="marca" href="#/" title="Inicio">
+        <span class="marca-logo">SL/HL</span>
+        <span class="marca-txt">Historia SL/HL · Estudio IB</span>
+      </a>
+
+      <div class="top-buscar">
+        <input id="buscador-global" type="search" placeholder="Buscar en todos los temas…" autocomplete="off">
+        <div id="buscador-resultados" class="buscador-pop" hidden></div>
+      </div>
+
+      <nav class="top-nav">
+        <a href="#/historiadores" class="nav-link">Historiadores</a>
+        <a href="#/mazo-mixto" class="nav-link">Mazo mixto</a>
+        <a href="#/comparar" class="nav-link">Comparar</a>
+        <button id="toggle-tema" class="btn-icono" title="Modo claro/oscuro" aria-label="Cambiar tema">🌙</button>
+      </nav>
+
+      <button id="menu-burger" class="btn-icono solo-movil" aria-label="Menú">☰</button>
+    </div>
+  </header>
+
+  <main id="app" class="app"><!-- render dinámico --></main>
+
+  <footer class="pie">
+    <span>De este barco no se baja nadie. | Ian K.F.</span>
+  </footer>
+
+  <!-- Núcleo -->
+  <script src="js/registro-api.js"></script>
+  <script src="js/progreso.js"></script>
+  <script src="js/componentes.js"></script>
+
+  <!-- Features -->
+  <script src="js/menu.js"></script>
+  <script src="js/tema.js"></script>
+  <script src="js/contenido.js"></script>
+  <script src="js/resumen.js"></script>
+  <script src="js/historiadores.js"></script>
+  <script src="js/cronologia.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/planificador.js"></script>
+  <script src="js/buscador.js"></script>
+  <script src="js/comparacion.js"></script>
+  <script src="js/mazo-mixto.js"></script>
+
+  <!-- Datos: registro + comparaciones primero; los temas "listo" se inyectan desde app.js -->
+  <script src="data/registro.js"></script>
+  <script src="data/comparaciones.js"></script>
+
+  <!-- Arranque (debe ir último) -->
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+/* ============================================================
+   Responsive — móvil y tablet
+   ============================================================ */
+
+@media (max-width: 920px) {
+  .cont-layout { grid-template-columns: 1fr; }
+  .cont-indice { position: static; order: -1; }
+  .cont-indice ol { display: flex; flex-wrap: wrap; gap: 4px; }
+  .cont-indice a { border-left: none; border-bottom: 3px solid transparent; }
+  .cont-indice a.activo { border-left: none; border-bottom-color: var(--acento); }
+}
+
+@media (max-width: 760px) {
+  .top-nav .nav-link { display: none; }
+  .solo-movil { display: inline-grid; place-items: center; }
+  .top-nav { gap: 4px; }
+  .marca-txt { display: none; }
+  .top-buscar { max-width: none; }
+  .top-inner { gap: 10px; padding: 9px 12px; }
+
+  /* menú móvil desplegable */
+  .top-nav.abierto { position: absolute; top: 100%; right: 10px; background: var(--marca); border-radius: 0 0 12px 12px; padding: 8px; flex-direction: column; box-shadow: var(--sombra-2); }
+  .top-nav.abierto .nav-link { display: block; }
+
+  .app { padding: 16px 12px 40px; }
+  .panel-vista { padding: 16px; }
+  .hero { padding: 20px 18px; }
+  .hero h1 { font-size: 1.5rem; }
+
+  .arte-fila { grid-template-columns: 1fr; }
+  .grid-temas { grid-template-columns: 1fr; }
+  .tema-cab .etqs { margin-left: 0; width: 100%; }
+
+  .pestanas { gap: 2px; }
+  .pestana { padding: 8px 10px; font-size: .86rem; }
+}
+
+@media (max-width: 480px) {
+  .fc-cara { padding: 18px; }
+  .fc-cara .fc-txt { font-size: 1rem; }
+  .quiz-pregunta { font-size: 1rem; }
+}
+
+/* Impresión: solo el contenido principal, útil para "leer el día antes" (Resumen) */
+@media print {
+  .top, .pie, .pestanas, .cont-nav, .btn-row, .fc-controles { display: none !important; }
+  body { background: #fff; color: #000; }
+  .panel-vista { box-shadow: none; border: none; }
+  .caja { break-inside: avoid; }
+}

@@ -1,0 +1,85 @@
+/* ============================================================
+   Cajas de anotación (fieles a los PDFs) + badges de etiqueta
+   Mismo código de color en claro y oscuro.
+   KISS amarillo · FRASE LISTA verde · TRUCO azul
+   HISTORIADOR violeta · TRAMPA rojo · DE CLASE gris
+   ============================================================ */
+
+.caja {
+  --c: #888;              /* color de acento de la caja */
+  --c-sof: #f0f0f0;       /* fondo suave */
+  border-left: 5px solid var(--c);
+  background: var(--c-sof);
+  border-radius: 10px;
+  padding: 11px 14px 11px 14px;
+  margin: 12px 0;
+  font-size: .92rem;
+  color: var(--texto);
+}
+.caja .caja-et {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--c);
+  padding: 2px 8px;
+  border-radius: 5px;
+  margin-right: 8px;
+  vertical-align: baseline;
+}
+.caja p { margin: .4em 0; }
+.caja p:first-of-type { display: inline; }   /* texto arranca pegado a la etiqueta */
+.caja strong { color: var(--texto); }
+
+/* --- Colores por tipo (claro) --- */
+.caja.kiss        { --c: #c9a21a; --c-sof: #fdf6dd; }
+.caja.frase       { --c: #1f9d57; --c-sof: #e5f6ec; }
+.caja.truco       { --c: #2f6df0; --c-sof: #e6eeff; }
+.caja.historiador { --c: #7c5cde; --c-sof: #efeafc; }
+.caja.trampa      { --c: #d23b3b; --c-sof: #fbe7e7; }
+.caja.clase       { --c: #6b7686; --c-sof: #eef1f5; }
+
+/* --- Colores por tipo (oscuro): acento igual, fondo tenue translúcido --- */
+html[data-tema="oscuro"] .caja.kiss        { --c: #e3b84a; --c-sof: rgba(227,184,74,.12); }
+html[data-tema="oscuro"] .caja.frase       { --c: #4cc585; --c-sof: rgba(76,197,133,.12); }
+html[data-tema="oscuro"] .caja.truco       { --c: #6fa0ff; --c-sof: rgba(111,160,255,.12); }
+html[data-tema="oscuro"] .caja.historiador { --c: #a78bff; --c-sof: rgba(167,139,255,.14); }
+html[data-tema="oscuro"] .caja.trampa      { --c: #ff7b7b; --c-sof: rgba(255,123,123,.12); }
+html[data-tema="oscuro"] .caja.clase       { --c: #9fb0c9; --c-sof: rgba(159,176,201,.12); }
+
+html[data-tema="oscuro"] .caja .caja-et { color: #0e1420; }
+
+/* ============================================================
+   Badges / etiquetas filtrables (chips de color)
+   ============================================================ */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .3px;
+  padding: 3px 9px; border-radius: 20px;
+  border: 1px solid transparent; cursor: default; white-space: nowrap;
+}
+.badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.badge.filtro { cursor: pointer; }
+.badge.filtro:hover { filter: brightness(.95); }
+.badge.filtro.off { opacity: .4; }
+
+.badge.kiss        { color: #c9a21a; background: #fdf6dd; border-color: #ecd98a; }
+.badge.frase       { color: #1f9d57; background: #e5f6ec; border-color: #a9e2c2; }
+.badge.truco       { color: #2f6df0; background: #e6eeff; border-color: #aac3fb; }
+.badge.historiador { color: #7c5cde; background: #efeafc; border-color: #c7b6f3; }
+.badge.trampa      { color: #d23b3b; background: #fbe7e7; border-color: #f0a9a9; }
+.badge.clase       { color: #6b7686; background: #eef1f5; border-color: #ccd4df; }
+.badge.tema        { color: var(--acento); background: var(--acento-sof); border-color: var(--borde-2); }
+
+html[data-tema="oscuro"] .badge.kiss        { background: rgba(227,184,74,.14); color: #e3b84a; border-color: rgba(227,184,74,.35); }
+html[data-tema="oscuro"] .badge.frase       { background: rgba(76,197,133,.14); color: #4cc585; border-color: rgba(76,197,133,.35); }
+html[data-tema="oscuro"] .badge.truco       { background: rgba(111,160,255,.14); color: #6fa0ff; border-color: rgba(111,160,255,.35); }
+html[data-tema="oscuro"] .badge.historiador { background: rgba(167,139,255,.16); color: #a78bff; border-color: rgba(167,139,255,.35); }
+html[data-tema="oscuro"] .badge.trampa      { background: rgba(255,123,123,.14); color: #ff7b7b; border-color: rgba(255,123,123,.35); }
+html[data-tema="oscuro"] .badge.clase       { background: rgba(159,176,201,.14); color: #9fb0c9; border-color: rgba(159,176,201,.35); }
+
+/* Leyenda de colores (filtro global) */
+.leyenda-colores { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 4px 0 18px; }
+.leyenda-colores .lc-tit { font-size: .8rem; color: var(--texto-sec); margin-right: 4px; }

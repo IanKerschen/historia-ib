@@ -1,0 +1,11 @@
+# No subir los materiales fuente pesados (el contenido ya está dentro de /data/*.js)
+*.pdf
+*.docx
+
+# Config local del editor / Claude (no hace falta publicarla)
+.claude/
+
+# Basura del sistema
+Thumbs.db
+.DS_Store
+desktop.ini
