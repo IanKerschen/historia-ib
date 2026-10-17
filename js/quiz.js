@@ -40,6 +40,12 @@
     }
     var cola = preparar();
 
+    // Deja el quiz a la vista (debajo del header fijo) sin saltar al tope de la página.
+    function enfocar() {
+      var y = cont.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: y < 0 ? 0 : y, behavior: "smooth" });
+    }
+
     function pintar() {
       respondida = false;
       var q = cola[i];
@@ -65,8 +71,8 @@
       });
       var sig = cont.querySelector("#q-siguiente");
       sig.addEventListener("click", function () {
-        if (i + 1 < cola.length) { i++; pintar(); C.irArriba(); }
-        else resultado();
+        if (i + 1 < cola.length) { i++; pintar(); enfocar(); }
+        else { resultado(); enfocar(); }
       });
     }
 
